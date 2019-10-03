@@ -10,6 +10,7 @@ namespace MarketConsolePOC
 {
     class Program
     {
+       
         static void Main(string[] args)
         {
             string baseAddress = "http://localhost:9010/";

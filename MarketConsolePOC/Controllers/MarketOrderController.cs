@@ -14,8 +14,9 @@ namespace MarketConsolePOC.Controllers
         public async Task<CreateMarketOrderResponse> CreateMarketOrder(CreateMarketOrderRequest createMarketOrderRequest)
         {
             var createMarketOrderResponse = new CreateMarketOrderResponse();
-            return createMarketOrderResponse;
+            await Task.Run(() => OrderHelper.ExecuteOrder(createMarketOrderRequest));
 
+            return createMarketOrderResponse;
         }
 
         public IEnumerable<string> Get()
