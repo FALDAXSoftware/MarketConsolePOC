@@ -15,22 +15,37 @@ namespace MarketConsolePOC
         {
             string baseAddress = "http://localhost:9010/";
 
+            WebApp.Start<Startup>(url: baseAddress);
+
+            Task.Factory.StartNew(OrderHelper.RandomOrderReceiver);
+
+            //while(true)
+            //{
+            //    if(OrderHelper.OrderProcessors.Any())
+            //    {
+            //        OrderHelper.OrderProcessors[0].orderStatus = OrderStatus.ToBeRemove;
+            //        OrderHelper.OrderProcessors[0].manualResetEvent.Set();
+            //    }
+            //    System.Threading.Thread.Sleep(60000);
+            //}
 
 
+
+            Console.ReadLine();
 
             // Start OWIN host 
-            using (WebApp.Start<Startup>(url: baseAddress))
-            {
-                // Create HttpCient and make a request to api/values 
-                HttpClient client = new HttpClient();
+            //using (WebApp.Start<Startup>(url: baseAddress))
+            //{
+            //    // Create HttpCient and make a request to api/values 
+            //    //HttpClient client = new HttpClient();
 
-            //    var response = client.GetAsync(baseAddress + "api/market").Result;
+            ////    var response = client.GetAsync(baseAddress + "api/market").Result;
 
 
-                //Console.WriteLine(response);
-                //Console.WriteLine(response.Content.ReadAsStringAsync().Result);
-                Console.ReadLine();
-            }
+            //    //Console.WriteLine(response);
+            //    //Console.WriteLine(response.Content.ReadAsStringAsync().Result);
+            //    Console.ReadLine();
+            //}
         }
     }
 }

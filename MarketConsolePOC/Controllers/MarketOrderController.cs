@@ -15,8 +15,8 @@ namespace MarketConsolePOC.Controllers
         {
             var createMarketOrderResponse = new CreateMarketOrderResponse();
             await Task.Run(() => OrderHelper.ExecuteOrder(createMarketOrderRequest));
-
-            return createMarketOrderResponse;
+            var order = OrderHelper.OrderProcessors.FirstOrDefault(x => x.CreateMarketrequest.RequestID == createMarketOrderRequest.RequestID);
+            return order.CreateMarketresponse;            
         }
 
         public IEnumerable<string> Get()
