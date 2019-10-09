@@ -70,6 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums.cs" />
     <Compile Include="OrderProcessor.cs" />
     <Compile Include="OrderHelper.cs" />
     <Compile Include="Controllers\MarketOrderController.cs" />

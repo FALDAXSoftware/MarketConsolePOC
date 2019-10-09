@@ -12,7 +12,7 @@ namespace MarketConsolePOC
     {
         public ManualResetEvent manualResetEvent = new ManualResetEvent(false);
         public string OrderNo;
-        public OrderStatus orderStatus;
+        public Enums.OrderStatus orderStatus;
         public CreateMarketOrderRequest CreateMarketrequest;
         public CreateMarketOrderResponse CreateMarketresponse;
 

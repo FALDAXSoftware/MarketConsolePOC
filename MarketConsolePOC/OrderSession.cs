@@ -116,8 +116,14 @@ namespace MarketConsolePOC
 
         public void OnMessage(QuickFix.FIX43.ExecutionReport m, SessionID s)
         {
-            
-            Console.WriteLine("Received execution report");
+            string orderId = m.ClOrdID.getValue();
+            byte ordStatus = (byte)m.OrdStatus.getValue();
+            if(ordStatus == Enums.OrderStatus.REJECTED)
+            {
+
+            }
+
+            Console.WriteLine($"Received execution report {m.ToString()}");
         }
 
         public void OnMessage(QuickFix.FIX43.OrderCancelReject m, SessionID s)

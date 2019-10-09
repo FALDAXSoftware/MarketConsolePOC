@@ -13,14 +13,7 @@ using QuickFix.Fields;
 
 namespace MarketConsolePOC
 {
-    public enum OrderStatus
-    {
-        Pending = 1,
-        Processed = 2,
-        Cancel = 3,
-        Complete = 4,
-        ToBeRemove = 5
-    }
+  
     
     public static class OrderHelper
     {
@@ -167,4 +160,13 @@ namespace MarketConsolePOC
         }
 
     }
+
+    //public enum OrderStatus
+    //{
+    //    Pending = 1,
+    //    Processed = 2,
+    //    Cancel = 3,
+    //    Complete = 4,
+    //    ToBeRemove = 5
+    //}
 }
