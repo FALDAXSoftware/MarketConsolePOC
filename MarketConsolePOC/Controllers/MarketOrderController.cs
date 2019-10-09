@@ -13,9 +13,9 @@ namespace MarketConsolePOC.Controllers
         [HttpPost]
         public async Task<CreateMarketOrderResponse> CreateMarketOrder(CreateMarketOrderRequest createMarketOrderRequest)
         {
-            var createMarketOrderResponse = new CreateMarketOrderResponse();
+            //var createMarketOrderResponse = new CreateMarketOrderResponse();
             await Task.Run(() => OrderHelper.ExecuteOrder(createMarketOrderRequest));
-            var order = OrderHelper.OrderProcessors.FirstOrDefault(x => x.CreateMarketrequest.RequestID == createMarketOrderRequest.RequestID);
+            var order = OrderHelper.OrderProcessors.FirstOrDefault(x => x.OrderNo == createMarketOrderRequest.ClOrdID);
             return order.CreateMarketresponse;            
         }
 

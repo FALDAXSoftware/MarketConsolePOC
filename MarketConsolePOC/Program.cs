@@ -15,9 +15,12 @@ namespace MarketConsolePOC
         {
             string baseAddress = "http://localhost:9010/";
 
+            
+            OrderHelper.Initialize();
+
             WebApp.Start<Startup>(url: baseAddress);
 
-            Task.Factory.StartNew(OrderHelper.RandomOrderReceiver);
+         //   Task.Factory.StartNew(OrderHelper.RandomOrderReceiver);
 
             //while(true)
             //{
