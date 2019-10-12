@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MarketConsolePOC.ViewModel
+namespace FixOrderConsole.ViewModel
 {
-    public class CreateMarketOrderRequest
+    public class CreateOrderRequest
     {
         //public int RequestID { get; set; }
         //public int ItemId { get; set; }

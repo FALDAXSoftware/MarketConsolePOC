@@ -1,4 +1,4 @@
-﻿using MarketConsolePOC.ViewModel;
+﻿using FixOrderConsole.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ using QuickFix.FIX43;
 using System.IO;
 using QuickFix.Fields;
 
-namespace MarketConsolePOC
+namespace FixOrderConsole
 {
   
     
@@ -27,13 +27,13 @@ namespace MarketConsolePOC
 
 
 
-        public static void ExecuteOrder(CreateMarketOrderRequest createMarketrequest)
+        public static void ExecuteOrder(CreateOrderRequest createOrderRequest)
         {
             OrderProcessor orderProcessor = new OrderProcessor();
-            orderProcessor.CreateMarketrequest = createMarketrequest;
+            orderProcessor.createOrderRequest = createOrderRequest;
             AddOrderProcessor(orderProcessor);
-            SendOrder(orderProcessor.CreateMarketrequest);
-            orderProcessor.ExecuteOrder();
+            SendOrder(orderProcessor.createOrderRequest);
+            orderProcessor.WaitForOrderExecution();
         }
 
         public static void AddOrderProcessor(OrderProcessor orderProcessor)
@@ -41,8 +41,8 @@ namespace MarketConsolePOC
             lock (objlock)
             {
                 // glastKnownOrderNo++;
-                orderProcessor.OrderNo = orderProcessor.CreateMarketrequest.ClOrdID;
-                orderProcessor.orderStatus = OrderStatus.Pending;
+                orderProcessor.OrderNo = orderProcessor.createOrderRequest.ClOrdID;
+                orderProcessor.orderStatus = Enums.OrderStatus.PENDING; // OrderStatus.Pending;
                 Console.WriteLine($"Order Request {orderProcessor.OrderNo}");
                 OrderProcessors.Add(orderProcessor);
             }
@@ -81,7 +81,7 @@ namespace MarketConsolePOC
         //                {
         //                    op.orderStatus = OrderStatus.Complete;                       
         //                }
-        //                Console.WriteLine($"Order {op.OrderNo} {op.CreateMarketrequest.ItemName} State change to {op.orderStatus.ToString()}");
+        //                Console.WriteLine($"Order {op.OrderNo} {op.createOrderRequest.ItemName} State change to {op.orderStatus.ToString()}");
         //                if(op.orderStatus == OrderStatus.Complete) ProcessOrder(op.OrderNo);
         //            }
         //        }
@@ -89,12 +89,12 @@ namespace MarketConsolePOC
         //    }
         //}
 
-        public static void ProcessOrder(string orderid)
-        {
-            var completeOrder = OrderProcessors.FirstOrDefault(x => x.OrderNo == orderid);
-            completeOrder.manualResetEvent.Set();
-            completeOrder.orderStatus = OrderStatus.ToBeRemove;
-        }
+        //public static void ProcessOrder(string orderid)
+        //{
+        //    var completeOrder = OrderProcessors.FirstOrDefault(x => x.OrderNo == orderid);
+        //    completeOrder.manualResetEvent.Set();
+        //    completeOrder.orderStatus = OrderStatus.ToBeRemove;
+        //}
 
         public static void Initialize()
         {
@@ -111,7 +111,7 @@ namespace MarketConsolePOC
 
         }
 
-        public static void SendOrder(CreateMarketOrderRequest orderRequest)
+        public static void SendOrder(CreateOrderRequest orderRequest)
         {
 
 

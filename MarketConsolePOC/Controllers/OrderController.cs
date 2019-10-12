@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
-using MarketConsolePOC.ViewModel;
+using FixOrderConsole.ViewModel;
 
-namespace MarketConsolePOC.Controllers
+namespace FixOrderConsole.Controllers
 {
-    public class MarketOrderController : ApiController
+    public class OrderController : ApiController
     {
         [HttpPost]
-        public async Task<CreateMarketOrderResponse> CreateMarketOrder(CreateMarketOrderRequest createMarketOrderRequest)
+        public async Task<CreateOrderResponse> CreateOrder(CreateOrderRequest createMarketOrderRequest)
         {
             //var createMarketOrderResponse = new CreateMarketOrderResponse();
             await Task.Run(() => OrderHelper.ExecuteOrder(createMarketOrderRequest));
             var order = OrderHelper.OrderProcessors.FirstOrDefault(x => x.OrderNo == createMarketOrderRequest.ClOrdID);
-            return order.CreateMarketresponse;            
+            return order.createOrderResponse;            
         }
 
         public IEnumerable<string> Get()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Owin;
 using System.Web.Http;
 
-namespace MarketConsolePOC
+namespace FixOrderConsole
 {
     public class Startup
     {

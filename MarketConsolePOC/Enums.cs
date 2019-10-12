@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MarketConsolePOC
+namespace FixOrderConsole
 {
     public class Enums
     {
@@ -19,7 +19,8 @@ namespace MarketConsolePOC
             PENDING_CANCELREPLACE = 6,
             STOPPED = 7,
             REJECTED = 8,
-            SUSPENDED = 9
+            SUSPENDED = 9,
+            PENDING = 98
         }
     }
 }

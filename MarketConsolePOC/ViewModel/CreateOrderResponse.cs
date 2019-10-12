@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MarketConsolePOC.ViewModel
+namespace FixOrderConsole.ViewModel
 {
-    public class CreateMarketOrderResponse
+    public class CreateOrderResponse
     {
         //public int RequestID { get; set; }
         //public int ItemId { get; set; }
@@ -17,7 +17,7 @@ namespace MarketConsolePOC.ViewModel
         public string OrderID { get; set; }
         public string ClOrdID { get; set; }
         public string ExecID { get; set; }
-        public char ExecInst { get; set; }
+        public string ExecInst { get; set; }
 
 
         //41 OrigClOrd C —  String(11)
@@ -73,7 +73,7 @@ namespace MarketConsolePOC.ViewModel
         //59 TimeInFor Y  
         //Specifies how long the order remains in effect char (1) 
         //0=DAY  1=Good Till Cancel(GTC) 3=Immediate Or  Cancel(IOC) 4=Fill Or Kill(FOK) 6=Good Till Date(GTD)
-        public char TimeInFor { get; set; }
+        public char TimeInForce { get; set; }
 
         //31 LastPx C 0 (zero)    Price(20) 
         //Price for the fill.Populated if ExecType (#150)=F (Trade), 0 (zero) otherwise.     
@@ -99,7 +99,7 @@ namespace MarketConsolePOC.ViewModel
         public decimal MaxShow { get; set; }
 
         //Identifies the type of the instrument
-        public byte Product { get; set; }
+        public int Product { get; set; }
 
 
 

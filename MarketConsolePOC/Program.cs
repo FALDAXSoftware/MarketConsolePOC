@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Owin.Hosting;
 using System.Net.Http;
 
-namespace MarketConsolePOC
+namespace FixOrderConsole
 {
     class Program
     {
