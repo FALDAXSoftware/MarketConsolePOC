@@ -170,19 +170,21 @@ namespace FixOrderConsole
 
                
                 //Console.WriteLine($"Received execution report {m.ToString()}");
-                if (r.OrdStatus != '0')
+
+                if(r.OrdStatus == '0')
                 {
+                    Console.WriteLine($"Order {r.ClOrdID} Status is New.. wait for next message");
+                }
+                else if(r.OrdStatus == '1')
+                {
+                    Console.WriteLine($"Order {r.ClOrdID} Status is Partial Fill.. wait for next message");
+                }
+                else
+                {                 
                     Enums.OrderStatus rstatus = (Enums.OrderStatus)((byte)r.OrdStatus);
                     Console.WriteLine($"Order {r.ClOrdID} Status is {rstatus.ToString()}");
                     receiveOrder.SetForOrderExecution();
                 }
-                else
-                {
-                    
-                    Console.WriteLine($"Order {r.ClOrdID} Status is New.. wait for next message");
-                }
-
-
 
                 //byte ordStatus =
                 //if (ordStatus == Enums.OrderStatus.REJECTED)
