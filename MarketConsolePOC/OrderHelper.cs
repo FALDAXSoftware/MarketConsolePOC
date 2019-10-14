@@ -111,6 +111,11 @@ namespace FixOrderConsole
 
         }
 
+        public static void Uninitialize()
+        {
+            if(!initiator.IsStopped) initiator.Stop();
+        }
+
         public static void SendOrder(CreateOrderRequest orderRequest)
         {
 

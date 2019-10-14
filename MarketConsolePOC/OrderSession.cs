@@ -147,8 +147,9 @@ namespace FixOrderConsole
                 r.OrigClOrd = m.ExecInst.getValue();
                 r.ExecType = m.ExecType.getValue();
                 r.OrdStatus = m.OrdStatus.getValue();
+                r.OrderID = m.OrderID.getValue();
                 if (r.OrdStatus != '8')
-                {
+                {                   
                     r.Symbol = m.Symbol.getValue();
                     r.Side = m.Side.getValue();
                     r.OrderQty = m.OrderQty.getValue();
@@ -160,13 +161,14 @@ namespace FixOrderConsole
                     r.LastPx = m.LastPx.getValue();
                     r.LastQty = m.LastQty.getValue();
                     r.AvgPx = m.AvgPx.getValue();
-                    r.TransactTime = m.TransactTime.getValue();
+                    r.TransactTime = m.TransactTime.getValue();                    
                     //if(m.MinQty != null)  r.MinQty = m.MinQty.getValue();
                     // r.ExpireTime = m.ExpireTime.getValue();
                     //  r.MaxShow = m.MaxShow.getValue();
                     r.Product = m.Product.getValue();
                 }
 
+               
                 //Console.WriteLine($"Received execution report {m.ToString()}");
                 if (r.OrdStatus != '0')
                 {

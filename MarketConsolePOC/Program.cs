@@ -37,6 +37,7 @@ namespace FixOrderConsole
                 Console.ReadLine();
             }
 
+            OrderHelper.Uninitialize();
             //   Task.Factory.StartNew(OrderHelper.RandomOrderReceiver);
 
             //while(true)
