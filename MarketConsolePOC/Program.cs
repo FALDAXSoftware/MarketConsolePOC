@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Owin.Hosting;
+//using Microsoft.Owin.Hosting;
 using System.Net.Http;
+using System.Web.Http.SelfHost;
+using System.Web.Http;
 
 namespace FixOrderConsole
 {
@@ -15,12 +17,27 @@ namespace FixOrderConsole
         {
             string baseAddress = "http://localhost:9010/";
 
-            
+           // baseAddress = "http://localhost:9010/";
+
             OrderHelper.Initialize();
 
-            WebApp.Start<Startup>(url: baseAddress);
+           // WebApp.Start<Startup>(url: baseAddress);
 
-         //   Task.Factory.StartNew(OrderHelper.RandomOrderReceiver);
+
+            var config = new HttpSelfHostConfiguration("http://localhost:9010");
+
+            config.Routes.MapHttpRoute(name: "API", routeTemplate:
+                                  "api/{controller}/{action}/{id}",
+                                 defaults: new { controller = "Home", id = RouteParameter.Optional });
+
+            using (HttpSelfHostServer server = new HttpSelfHostServer(config))
+            {
+                server.OpenAsync().Wait();
+                Console.WriteLine("Web API Server has started at http://localhost:9010");
+                Console.ReadLine();
+            }
+
+            //   Task.Factory.StartNew(OrderHelper.RandomOrderReceiver);
 
             //while(true)
             //{
