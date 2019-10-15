@@ -148,6 +148,7 @@ namespace FixOrderConsole
                 r.ExecType = m.ExecType.getValue();
                 r.OrdStatus = m.OrdStatus.getValue();
                 r.OrderID = m.OrderID.getValue();
+                r.ExecutionReport = m.ToString();
                 if (r.OrdStatus != '8')
                 {                   
                     r.Symbol = m.Symbol.getValue();

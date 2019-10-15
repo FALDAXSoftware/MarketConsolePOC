@@ -12,7 +12,7 @@ namespace FixOrderConsole.ViewModel
         //public int ItemId { get; set; }
 
         //public bool StatusFlag { get; set; } 
-
+        public string ExecutionReport { get; set; }
 
         public string OrderID { get; set; }
         public string ClOrdID { get; set; }
