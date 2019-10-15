@@ -161,11 +161,13 @@ namespace FixOrderConsole
                     r.TimeInForce = m.TimeInForce.getValue();
                     r.LastPx = m.LastPx.getValue();
                     r.LastQty = m.LastQty.getValue();
+                    r.LeavesQty = m.LeavesQty.getValue();
+                    r.CumQty = m.CumQty.getValue();
                     r.AvgPx = m.AvgPx.getValue();
                     r.TransactTime = m.TransactTime.getValue();                    
-                    //if(m.MinQty != null)  r.MinQty = m.MinQty.getValue();
-                    // r.ExpireTime = m.ExpireTime.getValue();
-                    //  r.MaxShow = m.MaxShow.getValue();
+                    r.MinQty = m.MinQty.getValue();
+                    r.ExpireTime = m.ExpireTime.getValue();
+                    r.MaxShow = m.MaxShow.getValue();
                     r.Product = m.Product.getValue();
                 }
 

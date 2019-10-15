@@ -85,6 +85,8 @@ namespace FixOrderConsole.ViewModel
         public decimal LastQty { get; set; }
         public decimal LeavesQty { get; set; }
 
+        public decimal CumQty { get; set; }
+
         public decimal AvgPx { get; set; }
 
         public DateTime TransactTime {get;set;}
