@@ -156,6 +156,7 @@ namespace FixOrderConsole
                     r.OrderQty = m.OrderQty.getValue();
                     r.OrdType = m.OrdType.getValue();
                     if (r.OrdType == '2') r.Price = m.Price.getValue();
+
                     r.Currency = m.Currency.getValue();
                     r.SecurityType = m.SecurityType.getValue();
                     r.TimeInForce = m.TimeInForce.getValue();
