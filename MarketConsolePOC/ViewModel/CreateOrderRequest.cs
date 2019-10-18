@@ -27,5 +27,14 @@ namespace FixOrderConsole.ViewModel
         public decimal? MinQty { get; set; }
         public string SecurityType { get; set; }
         public byte Product { get; set; }
+
+        public decimal? SettlCurrAmt { get; set; }
+        public string TradeDate { get; set; }
+        public string FutSettDate { get; set; }
+        public string SettlCurrency { get; set; }
+
+        public int OrdRejReason { get; set; }
+
+        public string Text { get; set; }
     }
 }

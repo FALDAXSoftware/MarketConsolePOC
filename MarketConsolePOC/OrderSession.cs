@@ -149,8 +149,9 @@ namespace FixOrderConsole
                 r.OrdStatus = m.OrdStatus.getValue();
                 r.OrderID = m.OrderID.getValue();
                 r.ExecutionReport = m.ToString();
-                if (r.OrdStatus != '8')
-                {                   
+                
+                //if (r.OrdStatus != '8')
+                //{                   
                     r.Symbol = m.Symbol.getValue();
                     r.Side = m.Side.getValue();
                     r.OrderQty = m.OrderQty.getValue();
@@ -168,12 +169,22 @@ namespace FixOrderConsole
                     r.TransactTime = m.TransactTime.getValue();
                     if (r.ExecType == 'F')
                     {
-                        r.MinQty = m.MinQty.getValue();
-                        r.ExpireTime = m.ExpireTime.getValue();
-                        r.MaxShow = m.MaxShow.getValue();
+                        //r.MinQty = m.MinQty.getValue();
+                      //  r.ExpireTime = m.ExpireTime.getValue();
+                        //r.MaxShow = m.MaxShow.getValue();
+                        
+                        r.FutSettDate = m.FutSettDate.getValue();
+                        r.SettlCurrency = m.SettlCurrency.getValue();
+                        r.TradeDate = m.TradeDate.getValue();
+                        r.SettlCurrAmt = m.SettlCurrAmt.getValue();
                     }
-                    r.Product = m.Product.getValue();
-                }
+                    if (r.ExecType == '8')
+                    {
+                        r.OrdRejReason = m.OrdRejReason.getValue();
+                        r.Text = m.Text.ToString();
+                    }
+                r.Product = m.Product.getValue();
+                //}
 
                
                 //Console.WriteLine($"Received execution report {m.ToString()}");
