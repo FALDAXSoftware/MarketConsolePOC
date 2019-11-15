@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums.cs" />
+    <Compile Include="LogWriter.cs" />
     <Compile Include="OrderProcessor.cs" />
     <Compile Include="OrderHelper.cs" />
     <Compile Include="Controllers\OrderController.cs" />

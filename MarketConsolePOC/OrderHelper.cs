@@ -43,7 +43,7 @@ namespace FixOrderConsole
                 // glastKnownOrderNo++;
                 orderProcessor.OrderNo = orderProcessor.createOrderRequest.ClOrdID;
                 orderProcessor.orderStatus = Enums.OrderStatus.PENDING; // OrderStatus.Pending;
-                Console.WriteLine($"Order Request {orderProcessor.OrderNo}");
+                LogWriter.WriteTraceLog($"Order Request Recevied  : {orderProcessor.OrderNo}");
                 OrderProcessors.Add(orderProcessor);
             }
         }
@@ -98,6 +98,7 @@ namespace FixOrderConsole
 
         public static void Initialize()
         {
+            LogWriter.WriteTraceLog("Before session initialize");
             _orderSession = new OrderSession();
             var location = System.Reflection.Assembly.GetEntryAssembly().Location;
             SessionSettings settings = new SessionSettings(Path.GetDirectoryName(location) + @"\OrderConfig.cfg");
@@ -108,6 +109,7 @@ namespace FixOrderConsole
             initiator.Start();
             //Give a few seconds to initate session
             System.Threading.Thread.Sleep(2000);
+            LogWriter.WriteTraceLog("After session initialize");
 
         }
 
@@ -157,11 +159,7 @@ namespace FixOrderConsole
             newOrder.Set(new SecurityType(orderRequest.SecurityType));
             newOrder.Set(new Product(orderRequest.Product));
             _orderSession.SendMessage(newOrder);
-            Console.WriteLine("Sending Order to Server");
-
-
-
-
+            LogWriter.WriteTraceLog($"Sending Order : {orderRequest.ClOrdID} to Server");
         }
 
     }

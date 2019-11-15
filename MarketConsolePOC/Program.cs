@@ -15,6 +15,7 @@ namespace FixOrderConsole
        
         static void Main(string[] args)
         {
+            LogWriter.WriteTraceLog("Application Start");
             string baseAddress = "http://localhost:9010/";
 
            // baseAddress = "http://localhost:9010/";
@@ -53,6 +54,8 @@ namespace FixOrderConsole
 
 
             Console.ReadLine();
+
+            LogWriter.WriteTraceLog("Application Exit");
 
             // Start OWIN host 
             //using (WebApp.Start<Startup>(url: baseAddress))

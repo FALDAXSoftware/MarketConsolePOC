@@ -28,10 +28,10 @@ namespace FixOrderConsole
         }
         //public static Session session
         //{ get; set; }
-        public void OnLogon(SessionID sessionID) { Console.WriteLine("Received Logon - " + sessionID.ToString()); }
+        public void OnLogon(SessionID sessionID) { LogWriter.WriteTraceLog("Received Logon - " + sessionID.ToString()); }
         public void OnLogout(SessionID sessionID)
         {
-            Console.WriteLine("Received Logout - " + sessionID.ToString());
+            LogWriter.WriteTraceLog("Received Logout - " + sessionID.ToString());
             if (ClientNotifyLogoff != null)
                 ClientNotifyLogoff.Invoke(this, null);
         }
@@ -45,7 +45,7 @@ namespace FixOrderConsole
             }
             else
             {
-                Console.WriteLine("## FromAdmin: " + message.ToString());
+                LogWriter.WriteTraceLog("## FromAdmin: " + message.ToString());
             }
 
         }
@@ -71,24 +71,25 @@ namespace FixOrderConsole
             }
             catch (Exception e)
             {
-                Console.WriteLine("#ERRORToADMIN==" + message.ToString() + "/n====ERROR==" + e.ToString());
+                // Console.WriteLine("#ERRORToADMIN==" + message.ToString() + "/n====ERROR==" + e.ToString());
+                LogWriter.WriteErrorLog(e, "ToAdmin");
             }
         }
 
         public void FromApp(Message message, SessionID sessionID)
         {
             try
-            {
-                Console.WriteLine("From app message :\n" + message.ToString());
+            {                
+                LogWriter.WriteTraceLog("From app message :\n" + message.ToString());
                 Crack(message, sessionID);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("==Cracker exception==");
+                LogWriter.WriteErrorLog(ex,"FromApp");
                 if (message.GetField(58) != null)
                     Console.WriteLine(message.GetField(58).ToString());
-                Console.WriteLine(ex.ToString());
-                Console.WriteLine(ex.StackTrace);
+                //Console.WriteLine(ex.ToString());
+                //Console.WriteLine(ex.StackTrace);
             }
         }
         public void ToApp(Message message, SessionID sessionID)
@@ -191,16 +192,16 @@ namespace FixOrderConsole
 
                 if(r.OrdStatus == '0')
                 {
-                    Console.WriteLine($"Order {r.ClOrdID} Status is New.. wait for next message");
+                    LogWriter.WriteTraceLog($"Order {r.ClOrdID} Status is New.. wait for next message");
                 }
                 else if(r.OrdStatus == '1')
                 {
-                    Console.WriteLine($"Order {r.ClOrdID} Status is Partial Fill.. wait for next message");
+                    LogWriter.WriteTraceLog($"Order {r.ClOrdID} Status is Partial Fill.. wait for next message");
                 }
                 else
                 {                 
                     Enums.OrderStatus rstatus = (Enums.OrderStatus)((byte)r.OrdStatus);
-                    Console.WriteLine($"Order {r.ClOrdID} Status is {rstatus.ToString()}");
+                    LogWriter.WriteTraceLog($"Order {r.ClOrdID} Status is {rstatus.ToString()}");
                     receiveOrder.SetForOrderExecution();
                 }
 
@@ -216,7 +217,7 @@ namespace FixOrderConsole
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                LogWriter.WriteErrorLog(ex,"OnMessage");
             }
 
 
@@ -267,7 +268,7 @@ namespace FixOrderConsole
             else
             {
                 // This probably won't ever happen.
-                Console.WriteLine("Can't send message: session not created.");
+                LogWriter.WriteTraceLog("Can't send message: session not created.");
             }
         }
 

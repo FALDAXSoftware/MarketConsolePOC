@@ -23,20 +23,20 @@ namespace FixOrderConsole
 
         public void WaitForOrderExecution()
         {
-            
-                //code for sending message
-                Console.WriteLine($"enter into wait one of Order {OrderNo}");
-                manualResetEvent.WaitOne(30000);
-                Console.WriteLine($"exit from wait one of Order {OrderNo}");
+
+            //code for sending message
+            LogWriter.WriteTraceLog($"enter into wait one of Order {OrderNo}");
+            manualResetEvent.WaitOne(30000);
+            LogWriter.WriteTraceLog($"exit from wait one of Order {OrderNo}");
         }
 
         public void SetForOrderExecution()
         {
 
             //code for sending message
-            Console.WriteLine($"enter into set one of Order {OrderNo}");
+            LogWriter.WriteTraceLog($"enter into set one of Order {OrderNo}");
             manualResetEvent.Set();
-            Console.WriteLine($"exit from set one of Order {OrderNo}");
+            LogWriter.WriteTraceLog($"exit from set one of Order {OrderNo}");
         }
 
     }
