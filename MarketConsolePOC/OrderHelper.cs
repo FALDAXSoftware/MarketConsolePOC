@@ -105,7 +105,7 @@ namespace FixOrderConsole
             IMessageStoreFactory storeFactory = new QuickFix.FileStoreFactory(settings);
             ILogFactory logFactory = new QuickFix.FileLogFactory(settings);
 
-            initiator = new QuickFix.Transport.SocketInitiator(_orderSession, storeFactory, settings);
+            initiator = new QuickFix.Transport.SocketInitiator(_orderSession, storeFactory, settings,logFactory);
             initiator.Start();
             //Give a few seconds to initate session
             System.Threading.Thread.Sleep(2000);
