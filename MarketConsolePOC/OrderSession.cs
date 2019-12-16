@@ -79,13 +79,13 @@ namespace FixOrderConsole
         public void FromApp(Message message, SessionID sessionID)
         {
             try
-            {                
+            {
                 LogWriter.WriteTraceLog("From app message :\n" + message.ToString());
                 Crack(message, sessionID);
             }
             catch (Exception ex)
             {
-                LogWriter.WriteErrorLog(ex,"FromApp");
+                LogWriter.WriteErrorLog(ex, "FromApp");
                 if (message.GetField(58) != null)
                     Console.WriteLine(message.GetField(58).ToString());
                 //Console.WriteLine(ex.ToString());
@@ -150,56 +150,59 @@ namespace FixOrderConsole
                 r.OrdStatus = m.OrdStatus.getValue();
                 r.OrderID = m.OrderID.getValue();
                 r.ExecutionReport = m.ToString();
-                
+
                 //if (r.OrdStatus != '8')
                 //{                   
-                    r.Symbol = m.Symbol.getValue();
-                    r.Side = m.Side.getValue();
-                    r.OrderQty = m.OrderQty.getValue();
-                    r.OrdType = m.OrdType.getValue();
-                    if (r.OrdType == '2') r.Price = m.Price.getValue();
+                r.Symbol = m.Symbol.getValue();
+                r.Side = m.Side.getValue();
+                r.OrderQty = m.OrderQty.getValue();
+                r.OrdType = m.OrdType.getValue();
+                if (r.OrdType == '2') r.Price = m.Price.getValue();
 
-                    r.Currency = m.Currency.getValue();
-                    r.SecurityType = m.SecurityType.getValue();
-                    r.TimeInForce = m.TimeInForce.getValue();
-                    r.LastPx = m.LastPx.getValue();
+                r.Currency = m.Currency.getValue();
+                r.SecurityType = m.SecurityType.getValue();
+                r.TimeInForce = m.TimeInForce.getValue();
+                r.LastPx = m.LastPx.getValue();
+                if (r.ExecType != '4')
+                {
                     r.LastQty = m.LastQty.getValue();
-                    r.LeavesQty = m.LeavesQty.getValue();
-                    r.CumQty = m.CumQty.getValue();
-                    r.AvgPx = m.AvgPx.getValue();
-                    r.TransactTime = m.TransactTime.getValue();
-                    if (r.ExecType == 'F')
-                    {
-                        //r.MinQty = m.MinQty.getValue();
-                      //  r.ExpireTime = m.ExpireTime.getValue();
-                        //r.MaxShow = m.MaxShow.getValue();
-                        
-                        r.FutSettDate = m.FutSettDate.getValue();
-                        r.SettlCurrency = m.SettlCurrency.getValue();
-                        r.TradeDate = m.TradeDate.getValue();
-                        r.SettlCurrAmt = m.SettlCurrAmt.getValue();
-                    }
-                    if (r.ExecType == '8')
-                    {
-                        r.OrdRejReason = m.OrdRejReason.getValue();
-                        r.Text = m.Text.ToString();
-                    }
+                }
+                r.LeavesQty = m.LeavesQty.getValue();
+                r.CumQty = m.CumQty.getValue();
+                r.AvgPx = m.AvgPx.getValue();
+                r.TransactTime = m.TransactTime.getValue();
+                if (r.ExecType == 'F')
+                {
+                    //r.MinQty = m.MinQty.getValue();
+                    //  r.ExpireTime = m.ExpireTime.getValue();
+                    //r.MaxShow = m.MaxShow.getValue();
+
+                    r.FutSettDate = m.FutSettDate.getValue();
+                    r.SettlCurrency = m.SettlCurrency.getValue();
+                    r.TradeDate = m.TradeDate.getValue();
+                    r.SettlCurrAmt = m.SettlCurrAmt.getValue();
+                }
+                if (r.ExecType == '8')
+                {
+                    r.OrdRejReason = m.OrdRejReason.getValue();
+                    r.Text = m.Text.ToString();
+                }
                 r.Product = m.Product.getValue();
                 //}
 
-               
+
                 //Console.WriteLine($"Received execution report {m.ToString()}");
 
-                if(r.OrdStatus == '0')
+                if (r.OrdStatus == '0')
                 {
                     LogWriter.WriteTraceLog($"Order {r.ClOrdID} Status is New.. wait for next message");
                 }
-                else if(r.OrdStatus == '1')
+                else if (r.OrdStatus == '1')
                 {
                     LogWriter.WriteTraceLog($"Order {r.ClOrdID} Status is Partial Fill.. wait for next message");
                 }
                 else
-                {                 
+                {
                     Enums.OrderStatus rstatus = (Enums.OrderStatus)((byte)r.OrdStatus);
                     LogWriter.WriteTraceLog($"Order {r.ClOrdID} Status is {rstatus.ToString()}");
                     receiveOrder.SetForOrderExecution();
@@ -217,7 +220,7 @@ namespace FixOrderConsole
             }
             catch (Exception ex)
             {
-                LogWriter.WriteErrorLog(ex,"OnMessage");
+                LogWriter.WriteErrorLog(ex, "OnMessage");
             }
 
 
